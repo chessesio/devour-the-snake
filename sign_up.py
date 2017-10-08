@@ -18,5 +18,7 @@ def add_user():
     username_ = input("Enter your username: ")
     password_ = input("Enter a password: ")
     
-    new_user = Twitter(name_,username_,password_)
-    new_user.sign_up()
+    new_user = SignUp(name_,username_,password_)
+    new_user.sign_up(new_user)
+
+add_user()
