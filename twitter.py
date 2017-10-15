@@ -37,13 +37,6 @@ class Twitter:
     def sign_out(self):
         self.logged_in = None
 
-    def find_user(self, name_or_email):
-        print(self.user_list)
-        for user_ in self.user_list:
-
-            if user_.username == name_or_email:
-                return user_
-        return False
 
 twit = Twitter()
 
@@ -90,85 +83,74 @@ def main():
                     else:
                         print("Wrong Username/email or password")
 
-                # my_user = twit.find_user(name_)
-                # if my_user:
-                #     if my_user.password == password_:
-                #         twit.sign_in(my_user)
-                #         print("\nYou are now logged in\n")
-                #         home()
-
-
-                # else:
-                #     print("Wrong username or password")
-
         else:
             print("Invalid option")
 
 
 # home function to be called after sign up
 def home():
-    home_ = int(input("1 Tweet\n2 View Profile\n3 Log out\n\n"))
+    loop2 = True
+    while loop2:
+        home_ = int(input("1 Tweet\n2 View Profile\n3 Log out\n\n"))
 
-    twit.logged_in.get_tweets()
+        twit.logged_in.get_tweets()
 
-    if home_ == 1:
+        if home_ == 1:
 
-        tweet_type = int(input("\n1 Text or\n2 Picture\n"))
-        
-        if tweet_type == 1:
-
-            tweet_prompt = input("Type your tweet here: \n")
+            tweet_type = int(input("\n1 Text or\n2 Picture\n"))
             
-            if len(tweet_prompt) <= 280 and len(tweet_prompt) > 0:
-                #Take user's username
-                #Take the tweet message
-                #Append to uer's tweets list
+            if tweet_type == 1:
+
+                tweet_prompt = input("Type your tweet here: \n")
                 
-                tweet_username_ = twit.logged_in.username
-                new_tweet = tweet.Tweet(tweet_username_,tweet_prompt)
-
-                twit.logged_in.tweet_action(new_tweet)
-
-            else:
-                print("Your tweet is too long...")
-
-        elif tweet_type == 2:
-
-                tweet_prompt = input("\nType your tweet here: \n")
-                picture_ = input("Upload picture:\n\n")
-
-                if len(tweet_prompt) <= 280 and len(tweet_prompt) > 0:
+                if len(tweet_prompt) <= 140 and len(tweet_prompt) > 0:
                     #Take user's username
                     #Take the tweet message
                     #Append to uer's tweets list
                     
                     tweet_username_ = twit.logged_in.username
-
-                    new_tweet = tweet.Tweet(username=tweet_username_,message=tweet_prompt,picture=picture_)
-
-                    twit.logged_in.tweet_action(new_tweet)
+                    
+                    twit.logged_in.tweet_action(tweet.Tweet(tweet_username_,tweet_prompt))
 
                 else:
                     print("Your tweet is too long...")
-    
-    elif home_ == 2:
-        profile()
 
-    elif home_ == 3:
-        twit.logged_in = None
+            elif tweet_type == 2:
+
+                    tweet_prompt = input("\nType your tweet here: \n")
+                    picture_ = input("Upload picture:\n\n")
+
+                    if len(tweet_prompt) <= 140 and len(tweet_prompt) > 0:
+                        #Take user's username
+                        #Take the tweet message
+                        #Append to uer's tweets list
+                        
+                        tweet_username_ = twit.logged_in.username
+                        
+                        twit.logged_in.tweet_action(tweet.Tweet(username=tweet_username_,message=tweet_prompt,picture=picture_))
+
+                    else:
+                        print("Your tweet is too long...")
         
+        elif home_ == 2:
+            profile()
 
-    else:
-        print("Invalid choice")
+        elif home_ == 3:
+            twit.logged_in = None
+            
+
+        else:
+            print("Invalid choice")
 
 def profile():
-    print("Name: {}\nUsername: {}\nProfile Picture: {}\n".format(twit.logged_in.name,twit.logged_in.username,twit.logged_in.prof_pic))
+    while loop3:
+        print("Name: {}\nUsername: {}\nProfile Picture: {}\n".format(twit.logged_in.name,twit.logged_in.username,twit.logged_in.prof_pic))
 
-    twit.logged_in.get_tweets()
+        twit.logged_in.get_tweets()
 
-    go_home = input("1. Home")
-    if go_home == "1":
-        home()
+        go_home = input("1. Home")
+        if go_home == "1":
+            home()
 
 if __name__ == "__main__":
     main()
