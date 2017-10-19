@@ -7,12 +7,13 @@ from datetime import datetime
 
 class Tweet:
 
-    def __init__(self,username,message,picture=None,date_time=datetime.now(),comments=[]):
+    def __init__(self,username,message,picture=None,date_time=datetime.now(),comments=[],tweet_id=0):
 
         self.username = username
         self.message = message
         self.picture = picture
         self.date_time = date_time
+        self.tweet_id = tweet_id
         self.comments = []
 
     def add_comment(self,comment):

@@ -11,7 +11,6 @@ class Twitter:
 
     def __init__(self):
         self.logged_in = None
-        # self.user_list = []
 
     def sign_up(self,name_,username_,email_,password_,profile_pic_):
         file_exist = os.path.isfile("users.csv")
@@ -26,8 +25,6 @@ class Twitter:
                 writer.writeheader()
             
             writer.writerow({"name":name_,"username":username_,"email":email_,"password":password_,"profile picture":profile_pic_})
-
-        # self.user_list.append(user)
 
     def sign_in(self,user_):
         # name,username,email,password
